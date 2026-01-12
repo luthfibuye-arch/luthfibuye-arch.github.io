@@ -106,8 +106,7 @@ form.addEventListener('keyup', function() {
 
 
 // kirim data ketika tombol chekout di klik
-chekOutButton.addEventListener('click', function(e) {
-    e.preventDefault();
+chekOutButton.addEventListener('click', function() {
     const formData = new FormData(form);
     const data = new URLSearchParams(formData);
     const objData = Object.fromEntries(data);
