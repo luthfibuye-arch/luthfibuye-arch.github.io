@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="src/app.js" async></script>
+    <link rel="stylesheet" href="fontawesome/css/all.css">
+    <title>Nirwana Hospot</title>
+</head>
+<body>
+    
+
+    <!-- navbar start -->
+     <nav class="navbar" x-data>
+        <a href="#" class="navbar-logo"><i class="fas fa-wifi"></i>NIRWANA<span>.HOSPOT</span></a>
+
+
+        <div class="navbar-nav">
+            <a href="#home">Home</a>
+            <a href="#about">Tentang Kami</a>
+            <a href="#produk">Produk</a>
+            <a href="#contact">Contact</a>
+        </div>
+
+
+        <div class="navbar-extra">
+            <a href="#" id="search-btn"><i class="fas fa-search"></i></a>
+            <a href="#" id="shoping-cart"><i class="fas fa-cart-shopping"></i><span class="notif-total" x-show="$store.cart.quantity" x-text="$store.cart.quantity"></span></a>
+            <a href="#" id="humburger-menu"><i class="fas fa-bars"></i></a>
+        </div>
+
+        <!-- search form start -->
+         <div class="search-form">
+            <input type="search" id="search-box" placeholder="Cari disini...">
+            <label for="search-box"><i class="fas fa-search"></i></label>
+         </div>
+        <!-- search form and -->
+
+        <!-- shoping cart start -->
+         <div class="shoping-cart">
+            <template x-for="(item, index) in $store.cart.items" x-keys="index">
+            <div class="cart-item">
+               <img :src="`image/${item.image}`" :alt="item.name">
+               <div class="item-detail">
+                <h3 x-text="item.name"></h3>
+                <div class="item-price">
+                    <span x-text="rupiah(item.price)"></span> &times;
+                    <button id="remove" @click="$store.cart.remove(item.id)">&minus;</button>
+                    <span x-text="item.quantity"></span>
+                    <button id="add" @click="$store.cart.add(item)">&plus;</button>&equals;
+                    <span x-text="rupiah(item.total)"></span>
+                </div>
+               </div>
+            </div>
+            </template>
+            <h4 x-show="!$store.cart.items.length" style="margin-top: 1rem;">Belum ada barang</h4>
+            <h4 x-show="$store.cart.items.length">Total : <span x-text="rupiah($store.cart.total)"></span></h4>
+            <div class="form-container" x-show="$store.cart.items.length">
+                <form action="" id="chekout-form" x-show="$store.cart.items.length">
+                    <input type="hidden" name="items" x-model="JSON.stringify($store.cart.items)">
+                    <input type="hidden" name="total" x-model="JSON.stringify($store.cart.total)">
+                    <h5>Detail Pelanggan</h5>
+
+                    <label for="name"></label>
+                    <span>Name</span>
+                    <input type="text" name="name" id="name">
+
+                    <label for="email"></label>
+                    <span>Email</span>
+                    <input type="email" name="email" id="email">
+
+                    <label for="phone"></label>
+                    <span>Phone</span>
+                    <input type="number" name="phone" id="phone" autocomplete="off">
+
+                    <button class="chekout-btn disabled" type="submit" id="chekout-btn" value="chekout">Chekout</button>
+                </form>
+            </div>
+         </div>
+        <!-- shoping cart and -->
+
+     </nav>
+    <!-- navbar and -->
+
+
+    <!-- hero section start-->
+      <section class="hero" id="home">
+        <main class="conten">
+            <h1>Jasa Pelayanan <span>Wi-Fi</span> Cepat & Stabil</h1>
+            <p>NIRWANA HOSPOT menyediakan layanan pemasangan Wi-Fi profesional dengan jaringan cepat dan stabil, dilengkapi pilihan voucher internet fleksibel untuk kebutuhan harian, usaha, maupun komunitas.</p>
+            <a href="#" class="cta">Beli Sekarang</a>
+        </main>
+     </section>
+    <!-- hero section and -->
+
+    <!-- Tentang Kami start -->
+     <section class="about" id="about">
+        <h2><span>Tentang</span> Kami</h2>
+
+        <div class="row">
+            <div class="about-img">
+                <img src="image/TentangKami_image.svg" alt="Tentang Kami">
+            </div>
+            <div class="conten">
+                <h3>Kenapa Memilih Kami</h3>
+                <div class="alasan">
+                    <div class="keuntungan">
+                        <div class="kotak1">
+                            <i class="fas fa-bolt"></i>
+                            <h4>Kecepatan Stabil & Cepat</h4>
+                        </div>
+                        <p>
+                            Layanan WiFi kami menggunakan jaringan berkualitas tinggi yang mampu memberikan kecepatan stabil untuk streaming, belajar online, hingga kebutuhan bisnis tanpa gangguan.
+                        </p>
+                    </div>
+                    <div class="keuntungan">
+                        <div class="kotak2">
+                            <i class="fas fa-wifi"></i>
+                            <h4>Jangkauan Luas</h4>
+                        </div>
+                        <p>
+                            Dengan perangkat dan konfigurasi yang tepat, jaringan WiFi dapat menjangkau seluruh area rumah atau tempat usaha secara merata tanpa titik lemah sinyal.
+                        </p>
+                    </div>
+                    <div class="keuntungan">
+                        <div class="kotak3">
+                            <i class="fas fa-tools"></i>
+                            <h4>Instalasi Profesional</h4>
+                        </div>
+                        <p>
+                            Proses pemasangan dilakukan oleh teknisi berpengalaman sehingga jaringan terpasang rapi, aman, dan langsung siap digunakan.</p>
+                    </div>
+                    <div class="keuntungan">
+                        <div class="kotak4">
+                            <i class="fas fa-tags"></i>
+                            <h4>Harga Terjangkau & Fleksibel</h4>
+                        </div>
+                        <p>
+                            Tersedia pilihan paket dan voucher internet yang dapat disesuaikan dengan kebutuhan harian, bulanan, maupun usaha kecil hingga menengah.
+                        </p>
+                    </div>
+                </div>
+             </div>
+        </div>
+
+     </section>
+    <!-- Tentang Kami and -->
+
+    <!-- Produk section start -->
+     <section id="produk" class="produk" x-data="produk()">
+        <h2><span>Pilihan</span> Paket</h2>
+        <p class="p1">Temukan berbagai pilihan paket pemasangan WiFi dan voucher internet yang siap menemani aktivitas online Anda dengan koneksi cepat dan stabil.</p>
+
+        <div class="row">
+            <template x-for="(item, index) in items" :key="item.id">
+                <div class="produk-card">
+                <div class="produk-icon">
+                    <a href="#" @click.prevent="$store.cart.add(item)"><i class="fas fa-cart-shopping"></i></a>
+                    <a href="#" @click.prevent="openModal(item)"><i class="fas fa-eye"></i></a>
+
+                </div>
+                <div class="produk-img">
+                    <img :src="`image/${item.image}`" :alt="item.name">
+                </div>
+                <div class="produk-conten">
+                    <h3 x-text="item.name"></h3>
+                    <div class="produk-stars">
+                        <i class="far fa-star"></i>
+                        <i class="far fa-star"></i>
+                        <i class="far fa-star"></i>
+                        <i class="far fa-star"></i>
+                        <i class="far fa-star"></i>
+                    </div>
+                    <div class="produk-price"><span x-text="rupiah(item.price)"></span></div>
+                </div>
+                </div>
+            </template>
+        </div>
+        <div class="modal" x-show="modalOpen" x-cloak x-transition @click.self="closeModal">
+            <div class="modal-container">
+                <a href="#" @click.prevent="closeModal" id="close-icon"><i class="fas fa-rectangle-xmark"></i></a>
+                <div class="modal-conten">
+                    <img :src="`image/${selectedItem.image}`" :alt="selectedItem.name">
+                    <div class="produk-conten2">
+                        <h3 x-text="selectedItem.name"></h3>
+                        <p class="p2" x-text="selectedItem.desc"></p>
+                        <div class="produk-stars">
+                            <i class="far fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <i class="far fa-star"></i>
+                        </div>
+                        <div class="produk-price"><span x-text="rupiah(selectedItem.price)"></span></div>
+                        <a href="#" @click.prevent="$store.cart.add(selectedItem); closeModal()"><i class="fas fa-cart-shopping"></i><span>Tambahkan</span></a>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+     </section>
+    <!-- Produk section and -->
+
+    <!-- contact section start -->
+     <section id="contact" class="contact">
+        <h2><span>Contact</span> Kami</h2>
+        <p>Temukan berbagai pilihan paket pemasangan WiFi dan voucher internet yang siap menemani aktivitas online Anda dengan koneksi cepat dan stabil.</p>
+
+        <div class="row">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3960.765681987787!2d107.13636957499651!3d-6.91859239308103!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zNsKwNTUnMDYuOSJTIDEwN8KwMDgnMjAuMiJF!5e0!3m2!1sid!2sid!4v1767941895045!5m2!1sid!2sid" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" class="map"></iframe>
+            <form action="">
+                <div class="input-grup">
+                    <i class="fas fa-user"></i>
+                    <input type="text" placeholder="Nama">
+                </div>
+                <div class="input-grup">
+                    <i class="fas fa-envelope"></i>
+                    <input type="email" placeholder="Email">
+                </div>
+                <div class="input-grup">
+                    <i class="fas fa-phone"></i>
+                    <input type="text" placeholder="Phone">
+                </div>
+                <button type="submit" class="btn">Kirim Pesan</button>
+            </form>
+        </div>
+     </section>
+    <!-- contact section start -->
+
+    <!-- footer start -->
+     <footer>
+        <div class="social">
+            <a href="#"><i class="fab fa-whatsapp"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-facebook"></i></a>
+        </div>
+        <div class="link">
+            <a href="#home">Home</a>
+            <a href="#about">Tentang Kami</a>
+            <a href="#produk">Produk</a>
+            <a href="#contact">Contact</a>
+        </div>
+        <div class="credit">
+            <p>Created by <a href="">luthfifariz</a>. | &copy; 2026.</p>
+        </div>
+     </footer>
+    <!-- footer and -->
+
+    <script src="sript.js"></script>
+</body>
+</html>
